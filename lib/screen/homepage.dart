@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:notosuru/firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:notosuru/screen/newnote.dart';
 
 import '../firestore.dart';
 
@@ -15,6 +16,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final FirestoreService firestoreService = FirestoreService();
 
+  void openNoteForm(){
+    
+  }
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -22,7 +27,12 @@ class _HomePageState extends State<HomePage> {
         title: Text("Noto Suru"),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const NewNote()),
+          );
+        },
          foregroundColor: Colors.white,
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.note_add),
