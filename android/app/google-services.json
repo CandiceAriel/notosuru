@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "11842777591",
+    "project_id": "notosuru-1fda5",
+    "storage_bucket": "notosuru-1fda5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11842777591:android:5157c0b42063cbae217ef2",
+        "android_client_info": {
+          "package_name": "com.example.notosuru"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5AX8gwDJpB0oJQsXFo7Y8eXn8s-vBeoE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
