@@ -10,7 +10,7 @@ class FirestoreService {
       {
         'title': title,
         'content': content,
-        'timestamp':Timestamp.now()
+        'dateCreated':Timestamp.now()
       }
     );
   }
@@ -19,5 +19,14 @@ class FirestoreService {
   Stream<QuerySnapshot> getNotesStream() {
     final notesStream = notes.snapshots();
     return notesStream;
+  }
+
+  //UPDATE
+  Future<void> updateNote( String docID, String newTitle, String newContent){
+    return notes.doc(docID).update({
+      'title': newTitle,
+      'content': newContent,
+      'dateCreated': Timestamp.now()
+    });
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:notosuru/firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:notosuru/screen/newnote.dart';
+import 'package:notosuru/screen/note.dart';
 
 import '../firestore.dart';
 
@@ -15,10 +16,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final FirestoreService firestoreService = FirestoreService();
-
-  void openNoteForm(){
-    
-  }
 
   @override
   Widget build(BuildContext context){
@@ -55,24 +52,33 @@ class _HomePageState extends State<HomePage> {
 
                   Map<String, dynamic> data = document.data() as Map<String, dynamic>;
                   String noteTitle = data['title'];
+                  String noteContent = data['content'];
 
-                  return Container(
-                    height: 100.0,
-                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                    padding: const EdgeInsets.all(20),
-                    color: Colors.white,
-                    child: Column(
-                      children: [
-                        Text(
-                          data['title'],
-                          style: GoogleFonts.nunitoSans(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.w800
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Note(docID: docID, title: noteTitle, content: noteContent)),
+                      );
+                    },
+                    child: Container(
+                      height: 100.0,
+                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                      padding: const EdgeInsets.all(20),
+                      color: Colors.white,
+                      child: Column(
+                        children: [
+                          Text(
+                            data['title'],
+                            style: GoogleFonts.nunitoSans(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w800
+                            ),
                           ),
-                        ),
-                        Text(data['dateCreated'].toString())
-                    ]),
-                  );
+                          Text(data['dateCreated'].toString())
+                      ]),
+                    )
+                  ); 
                 }
               );
             } else {

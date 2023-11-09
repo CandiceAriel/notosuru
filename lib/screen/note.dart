@@ -1,35 +1,26 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:notosuru/firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class NewNote extends StatefulWidget {
-  const NewNote({super.key});
+class Note extends StatefulWidget {
+  Note({Key? key, required this.docID, required this.title, required this.content}) : super(key: key);
+  final String docID;
+  final String title;
+  final String content;
 
   @override
-  State<NewNote> createState() => _NewNoteState();
+  State<Note> createState() => _NoteState(docID, title, content);
 }
 
-class _NewNoteState extends State<NewNote> {
+class _NoteState extends State<Note> {
   final FirestoreService firestoreService = FirestoreService();
   final TextEditingController titleTextController = TextEditingController();
   final TextEditingController contentTextController = TextEditingController();
-  
-  void showSnackbar(){
-     final snackBar = SnackBar(
-            content: const Text('Note added successfully'),
-            action: SnackBarAction(
-              label: 'Undo',
-              onPressed: () {
-                // Some code to undo the change.
-              },
-            ),
-          );
-
-          // Find the ScaffoldMessenger in the widget tree
-          // and use it to show a SnackBar.
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
+   String docID;
+   String title;
+   String content;
+  _NoteState(this. docID, this.title, this.content);  
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +30,7 @@ class _NewNoteState extends State<NewNote> {
         actions: [
           ElevatedButton(
             onPressed: (){
-              firestoreService.addNote(titleTextController.text, contentTextController.text);
-
-              titleTextController.clear();
-              contentTextController.clear();
-              showSnackbar();
-
-              Navigator.pop(context);
+              firestoreService.updateNote(docID , titleTextController.text, contentTextController.text);
             }, 
             child: Text('Save')
           )
@@ -55,7 +40,8 @@ class _NewNoteState extends State<NewNote> {
          padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            TextField(
+            TextFormField(
+              initialValue: title,
               controller: titleTextController,
               decoration: const InputDecoration(
                 labelText: 'Title',
@@ -63,6 +49,7 @@ class _NewNoteState extends State<NewNote> {
               
             ),
             TextFormField(
+              initialValue: content,
               controller: contentTextController,
               decoration: const InputDecoration(
                 labelText: 'Write your thoughts',
