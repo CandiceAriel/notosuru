@@ -62,21 +62,38 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                     child: Container(
-                      height: 100.0,
+                      height: 120.0,
                       margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                       padding: const EdgeInsets.all(20),
-                      color: Colors.white,
-                      child: Column(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      child: Row(
                         children: [
-                          Text(
-                            data['title'],
-                            style: GoogleFonts.nunitoSans(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w800
-                            ),
+                          Expanded(
+                            flex: 7,
+                            child: Column(
+                              children: [
+                                Text(
+                                  data['title'],
+                                  style: GoogleFonts.nunitoSans(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w800
+                                  ),
+                                ),
+                                Text(data['dateCreated'].toString())
+                            ]),
                           ),
-                          Text(data['dateCreated'].toString())
-                      ]),
+                          Expanded(
+                            child: IconButton(
+                              onPressed: () => firestoreService.deleteNote(docID), 
+                              icon: const Icon(Icons.delete)
+                            )
+                          )
+                        ],
+                      )
+                      
                     )
                   ); 
                 }

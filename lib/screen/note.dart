@@ -20,7 +20,8 @@ class _NoteState extends State<Note> {
    String docID;
    String title;
    String content;
-  _NoteState(this. docID, this.title, this.content);  
+  _NoteState(this. docID, this.title, this.content); 
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +32,10 @@ class _NoteState extends State<Note> {
           ElevatedButton(
             onPressed: (){
               firestoreService.updateNote(docID , titleTextController.text, contentTextController.text);
+               Navigator.pop(context);
             }, 
-            child: Text('Save')
+            child: Text('Save'),
+           
           )
         ],
       ),
@@ -41,16 +44,16 @@ class _NoteState extends State<Note> {
         child: Column(
           children: [
             TextFormField(
-              initialValue: title,
-              controller: titleTextController,
+              //initialValue: widget.title,
+              controller: titleTextController..text= title,
               decoration: const InputDecoration(
                 labelText: 'Title',
               ),
               
             ),
             TextFormField(
-              initialValue: content,
-              controller: contentTextController,
+              //initialValue: content,
+              controller: contentTextController..text= content,
               decoration: const InputDecoration(
                 labelText: 'Write your thoughts',
               ),
