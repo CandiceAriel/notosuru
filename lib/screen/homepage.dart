@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const NewNote()),
+            MaterialPageRoute(builder: (context) => Note(docID: '', title: '', content: '',)),
           );
         },
          foregroundColor: Colors.white,
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                     child: Container(
-                      height: 120.0,
+                      height: 110.0,
                       margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
@@ -74,15 +74,24 @@ class _HomePageState extends State<HomePage> {
                           Expanded(
                             flex: 7,
                             child: Column(
+                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  data['title'],
-                                  style: GoogleFonts.nunitoSans(
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.w800
+                                Expanded(
+                                  child: Text(
+                                    data['title'],
+                                    style: GoogleFonts.nunitoSans(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.w800
+                                    ),
                                   ),
                                 ),
-                                Text(data['dateCreated'].toString())
+                                Expanded(
+                                  child: Text(
+                                    data['content'],
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  )
+                                )
                             ]),
                           ),
                           Expanded(

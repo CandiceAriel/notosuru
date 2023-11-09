@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:notosuru/firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:notosuru/screen/newnote.dart';
 
 class Note extends StatefulWidget {
   Note({Key? key, required this.docID, required this.title, required this.content}) : super(key: key);
@@ -25,7 +26,7 @@ class _NoteState extends State<Note> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return docID!='' && title!= '' && content!='' ? Scaffold(
       appBar: AppBar(
         title: Text("New Note"),
         actions: [
@@ -47,20 +48,24 @@ class _NoteState extends State<Note> {
               //initialValue: widget.title,
               controller: titleTextController..text= title,
               decoration: const InputDecoration(
-                labelText: 'Title',
+                border: InputBorder.none,
               ),
-              
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.w800
+              ),
             ),
             TextFormField(
               //initialValue: content,
               controller: contentTextController..text= content,
               decoration: const InputDecoration(
-                labelText: 'Write your thoughts',
+                border: InputBorder.none,
+                hintText: 'Write your thoughts',
               ),
             ),
           ]
         ),
       ),
-    );
+    ) : NewNote();
   }
 }

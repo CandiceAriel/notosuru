@@ -57,15 +57,21 @@ class _NewNoteState extends State<NewNote> {
           children: [
             TextField(
               controller: titleTextController,
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.w800
+              ),
               decoration: const InputDecoration(
-                labelText: 'Title',
+                hintText: 'Title',
+                border: InputBorder.none
               ),
               
             ),
             TextFormField(
               controller: contentTextController,
               decoration: const InputDecoration(
-                labelText: 'Write your thoughts',
+                border: InputBorder.none,
+                hintText: 'Write your thoughts',
               ),
             ),
           ]
