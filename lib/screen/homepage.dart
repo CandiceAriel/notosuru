@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:notosuru/firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:notosuru/screen/newnote.dart';
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
         child: Icon(Icons.note_add),
       ),
       body: Container(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         color: Colors.grey[200],
         child:  StreamBuilder(
           stream: firestoreService.getNotesStream(),
@@ -61,49 +62,82 @@ class _HomePageState extends State<HomePage> {
                         MaterialPageRoute(builder: (context) => Note(docID: docID, title: noteTitle, content: noteContent)),
                       );
                     },
-                    child: Container(
-                      height: 110.0,
-                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                      ),
-                      child: Row(
+                    child: Slidable(
+                      endActionPane: ActionPane(
+                        motion: StretchMotion(), 
                         children: [
-                          Expanded(
-                            flex: 7,
-                            child: Column(
-                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    data['title'],
-                                    style: GoogleFonts.nunitoSans(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w800
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    data['content'],
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                  )
-                                )
-                            ]),
-                          ),
-                          Expanded(
-                            child: IconButton(
-                              onPressed: () => firestoreService.deleteNote(docID), 
-                              icon: const Icon(Icons.delete)
-                            )
+                          SlidableAction(
+                            onPressed: ((context) {
+                              firestoreService.deleteNote(docID);
+                            }) ,
+                            icon: Icons.delete,
+                            backgroundColor: Colors.redAccent,
                           )
-                        ],
+                        ]
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(topLeft: Radius.circular(8), bottomLeft: Radius.circular(8)),
+                          color: Colors.white
+                        ),
+                        child: ListTile(
+                          tileColor: Colors.white,
+                          title: Text(
+                            data['title'],
+                            style: GoogleFonts.nunitoSans(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w800
+                            ),
+                          ),
+                          subtitle: Text(
+                            data['title'],
+                            style: GoogleFonts.nunitoSans(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w800
+                            ),
+                          ),
+                        )
                       )
                       
+                      // child: Container(
+                      //   height: 80.0,
+                      //   margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                      //   padding: const EdgeInsets.all(20),
+                      //   decoration: BoxDecoration(
+                      //     borderRadius: BorderRadius.only(topLeft: Radius.circular(8), bottomLeft: Radius.circular(8)),
+                      //     color: Colors.white,
+                      //   ),
+                      //   child: Row(
+                      //     children: [
+                      //       Expanded(
+                      //         flex: 7,
+                      //         child: Column(
+                      //           crossAxisAlignment: CrossAxisAlignment.start,
+                      //           children: [
+                      //             Expanded(
+                      //               child: Text(
+                      //                 data['title'],
+                      //                 style: GoogleFonts.nunitoSans(
+                      //                   fontSize: 18.0,
+                      //                   fontWeight: FontWeight.w800
+                      //                 ),
+                      //               ),
+                      //             ),
+                      //             Expanded(
+                      //               child: Text(
+                      //                 data['content'],
+                      //                 overflow: TextOverflow.ellipsis,
+                      //                 maxLines: 1,
+                      //               )
+                      //             )
+                      //         ]),
+                      //       ),
+                      //     ],
+                      //   )
+                        
+                      // )
                     )
+                    
                   ); 
                 }
               );
