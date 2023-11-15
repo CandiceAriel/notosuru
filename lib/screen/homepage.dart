@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:notosuru/firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:notosuru/screen/newnote.dart';
-import 'package:notosuru/screen/note.dart';
-
+import 'package:flutter/services.dart' show rootBundle;
 import '../firestore.dart';
+
+//load component
+import 'package:notosuru/screen/note.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -44,16 +45,17 @@ class _HomePageState extends State<HomePage> {
             if(snapshot.hasData){
               List notesList = snapshot.data!.docs;
 
-              return ListView.builder(
-                itemCount: notesList.length,
-                itemBuilder: (context, index){
-                  DocumentSnapshot document = notesList[index];
-                  String docID = document.id;
+              if(notesList.length != 0){
+                return ListView.builder(
+                  itemCount: notesList.length,
+                  itemBuilder: (context, index){
+                    DocumentSnapshot document = notesList[index];
+                    String docID = document.id;
 
 
-                  Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-                  String noteTitle = data['title'];
-                  String noteContent = data['content'];
+                    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+                    String noteTitle = data['title'];
+                    String noteContent = data['content'];
 
                   return InkWell(
                     onTap: () {
@@ -142,7 +144,14 @@ class _HomePageState extends State<HomePage> {
                 }
               );
             } else {
-              return const Text("No Notes");
+              return const Column(
+                children: [
+                  Image(
+                      image: AssetImage('assets/images/Shrug-bro.png')
+                    ),
+                  Text('Note is empty')
+                ]
+              );
             }
           }
         ),

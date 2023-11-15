@@ -11,7 +11,11 @@ dependencies:
   firebase_core: ^2.21.0
   flutter:
     sdk: flutter
+<<<<<<< HEAD
   flutter_slidable: ^3.0.1
+=======
+  flutter_svg: ^2.0.9
+>>>>>>> 174f22226af3ae5248120ecdd0adb5edab3ec285
   google_fonts: ^6.1.0
 
 dev_dependencies:
@@ -21,3 +25,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/
+    - assets/images/Shrug-bro.png
