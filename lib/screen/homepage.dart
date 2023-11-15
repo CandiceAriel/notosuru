@@ -101,62 +101,37 @@ class _HomePageState extends State<HomePage> {
                         )
                       )
                       
-                      // child: Container(
-                      //   height: 80.0,
-                      //   margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                      //   padding: const EdgeInsets.all(20),
-                      //   decoration: BoxDecoration(
-                      //     borderRadius: BorderRadius.only(topLeft: Radius.circular(8), bottomLeft: Radius.circular(8)),
-                      //     color: Colors.white,
-                      //   ),
-                      //   child: Row(
-                      //     children: [
-                      //       Expanded(
-                      //         flex: 7,
-                      //         child: Column(
-                      //           crossAxisAlignment: CrossAxisAlignment.start,
-                      //           children: [
-                      //             Expanded(
-                      //               child: Text(
-                      //                 data['title'],
-                      //                 style: GoogleFonts.nunitoSans(
-                      //                   fontSize: 18.0,
-                      //                   fontWeight: FontWeight.w800
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //             Expanded(
-                      //               child: Text(
-                      //                 data['content'],
-                      //                 overflow: TextOverflow.ellipsis,
-                      //                 maxLines: 1,
-                      //               )
-                      //             )
-                      //         ]),
-                      //       ),
-                      //     ],
-                      //   )
-                        
-                      // )
+                      
                     )
                     
                   ); 
                 }
               );
+              } else {
+                return const Column(
+                  children: [
+                    Image(
+                        image: AssetImage('assets/images/Shrug-bro.png')
+                      ),
+                    Text('Note is empty')
+                  ]
+                );
+              }
             } else {
-              return const Column(
-                children: [
-                  Image(
-                      image: AssetImage('assets/images/Shrug-bro.png')
-                    ),
-                  Text('Note is empty')
-                ]
+              return const Center(
+                child: Column(
+                  children: [
+                    Image(
+                        image: AssetImage('assets/images/Shrug-bro.png')
+                      ),
+                    Text('Note is empty')
+                  ]
+                ),
               );
             }
           }
         ),
       )
-       
     );
   }
 }
