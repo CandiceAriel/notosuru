@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:notosuru/app.dart';
+import 'package:notosuru/notes_observer.dart';
 import 'firebase_options.dart';
-
-import 'package:notosuru/screen/homepage.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MainApp());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  Bloc.observer = const NotesObserver();
+  runApp(const App());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return  const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
-    );
-  }
-}
