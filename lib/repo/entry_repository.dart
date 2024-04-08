@@ -7,7 +7,7 @@ class NotesRepository {
 
   //READ
   Stream<List<Note>> getNotesStream() {
-   final fetchedNotes =  notes.snapshots().map((snapshot) {
+   final fetchedNotes =  noteStream.snapshots().map((snapshot) {
       return snapshot.docs.map((doc) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
         return Note(

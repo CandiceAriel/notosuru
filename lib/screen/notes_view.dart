@@ -8,6 +8,32 @@ class NotesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<NotesBloc, NoteState>(
+      listener: ,
+        builder: (context, state){
+          if(state.notes.isEmpty){
+            return const Center(
+                  child: Text(
+                    "No Data",
+                  ),
+                );
+          } 
+          
+          return const Column(
+            children: [
+              Text('Data')
+            ],
+          );
+        }
+    );
+  }
+}
+
+class NotesVieWidget extends StatelessWidget {
+  NotesVieWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<NotesBloc, NoteState>(
         builder: (context, state){
           if(state.notes.isEmpty){

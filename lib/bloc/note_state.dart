@@ -46,6 +46,9 @@ final class NotesLoading extends NoteState {}
 final class NotesFetched extends NoteState {
   final List<Note> notes;
   NotesFetched(this.notes);
+
+   @override
+  List<Object?> get props => [notes];
 }
 
 final class FetchingError extends NoteState {

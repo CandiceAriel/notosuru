@@ -20,6 +20,7 @@ class FirestoreService {
     final notesStream = notes.snapshots();
     return notesStream;
   }
+  
 
   //UPDATE
   Future<void> updateNote( String docID, String newTitle, String newContent){
